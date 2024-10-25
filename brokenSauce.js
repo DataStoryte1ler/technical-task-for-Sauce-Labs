@@ -23,29 +23,29 @@ describe('Broken Sauce', function () {
             let driver = await new Builder().withCapabilities(utils.brokenCapabilities)
                     .usingServer(ONDEMAND_URL).build();
 
-        /*            
+                    
         await driver.get("https://www.google.com");
         // If you see a German or English GDPR modal on google.com you 
         // will have to code around that or use the us-west-1 datacenter.
         // You can investigate the modal elements using a Live Test(https://app.saucelabs.com/live/web-testing)
         
-        // I wasn't able to pypass GDPR, despite trying a bunch of different methods
-        let AcceptButton = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Alle akzeptieren')]")), 10000);
+        // I wasn't able to bypass GDPR, despite trying a bunch of different methods
+        let AcceptButton = await driver.wait(until.elementLocated(By.xpath("//button[text()='Alle akzeptieren']")), 10000);
         await driver.wait(until.elementIsVisible(AcceptButton), 10000);
         await AcceptButton.click();
 
 
-        let search = await driver.findElement(By.name("q"));
+        let search = await driver.findElement(By.name("q")); // replaced Search with q which is the proper name attribute
         await search.sendKeys("Sauce Labs");
         
         let button = await driver.findElement(By.name("btnK"))
         await button.click()
 
-        let page = await driver.wait(until.elementLocated(By.partialLinkText("Sauce")), 20000);
-        await button.click()
-        */
+        let page = await driver.wait(until.elementLocated(By.partialLinkText("sauce")), 20000);
+        await page.click() // added click action
+        
 
-        // Navigate to Sauce Labs website and find 'Recources' menu
+        // Navigate to the Sauce Labs website and find the 'Resources' menu
         await driver.get("https://saucelabs.com");
         let resources = await driver.wait(until.elementLocated(By.xpath("//*[text()='Resources']")), 10000);
         await driver.wait(until.elementIsVisible(resources), 10000);
@@ -54,11 +54,11 @@ describe('Broken Sauce', function () {
         let actionRes = driver.actions({ async: true });
         await actionRes.move({ origin: resources }).perform();
 
-        // There's no 'Documentation' link in the 'Recources' dropdown menu
+        // There's no 'Documentation' link in the 'Resources' dropdown menu
         let developers = await driver.wait(until.elementLocated(By.xpath("//*[text()='Developers']")), 10000);
         await driver.wait(until.elementIsVisible(developers), 10000);
         
-        // Therefore, navigating to 'Developers' dropdown menu
+        // Therefore, navigating to the 'Developers' dropdown menu
         let actionDev = driver.actions({ async: true });
         await actionDev.move({ origin: developers }).perform();
         
