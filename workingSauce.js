@@ -69,7 +69,9 @@ describe('Working Sauce', function () {
     const sendButtonElement = await driver.wait(until.elementLocated(By.className(sendButtonClass)), 20000);
     await sendButtonElement.click();
 
-    // Task V: I wasn't able to adjust the status, CLI Tool didn't work for me
+    /* Task V: I made CLI Tool work for me only after setting up the same environment in Linux,
+       I ran the command: sl updateJob $SAUCE_USERNAME 0d1539d6640d4fb9bc3757a4f8dab5e9 "{\"passed\":true}" -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -r 'eu-central-1'
+       and updated the 0d1539d6640d4fb9bc3757a4f8dab5e9 job status successfully */
 
     await driver.quit();
     });
