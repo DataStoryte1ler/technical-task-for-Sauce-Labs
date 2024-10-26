@@ -38,11 +38,11 @@ describe('Broken Sauce', function () {
         let search = await driver.findElement(By.name("q")); // replaced Search with q which is the proper name attribute
         await search.sendKeys("Sauce Labs");
         
-        let button = await driver.findElement(By.name("btnK"))
-        await button.click()
+        let button = await driver.findElement(By.name("btnK"));
+        await button.click();
 
         let page = await driver.wait(until.elementLocated(By.partialLinkText("sauce")), 20000);
-        await page.click() // added click action
+        await page.click(); // added click action
         
 
         // Navigate to the Sauce Labs website and find the 'Resources' menu
